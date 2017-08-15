@@ -20,15 +20,17 @@ public class CallListActivity extends AppCompatActivity {
     String TAG = "TAG";
     private RecyclerView recyclerView;
     private CallListAdapter cAdapter;
-    TextView org,location;
+    TextView gauge, river,basedon,location;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_call_list);
-        org=(TextView)findViewById(R.id.org);
+        gauge=(TextView)findViewById(R.id.gauge);
+        river=(TextView)findViewById(R.id.river);
         location=(TextView)findViewById(R.id.location);
+        basedon=(TextView)findViewById(R.id.based);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
@@ -39,8 +41,21 @@ public class CallListActivity extends AppCompatActivity {
         Intent intent = getIntent();
         latLon = (LatLon) intent.getSerializableExtra("rumi");
         Log.e(TAG, "onCreate: " + latLon.getGauze());
-        org.setText(latLon.getGauze());
-        location.setText(latLon.getLocation());
+        gauge.setText("गेज: "+latLon.getGauze());
+        Log.e(TAG, "onCreate: "+"नदि" );
+        if (latLon.getRiver().isEmpty()) {
+            river.setText("");
+
+        }
+        else
+        {
+            river.setText("नदि: "+latLon.getRiver());
+
+        }
+
+
+        basedon.setText("कैफियत: "+latLon.getBasedOn());
+        location.setText("स्थान: "+latLon.getLocation());
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 

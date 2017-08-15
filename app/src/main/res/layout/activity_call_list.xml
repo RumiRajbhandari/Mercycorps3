@@ -14,27 +14,46 @@
         android:titleTextColor="@color/textPrimary">
 
     </android.support.v7.widget.Toolbar>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/org"
-        android:textSize="25dp"
-        android:textStyle="bold"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/location"
-        android:textSize="20dp"
-        android:layout_marginLeft="20dp"/>
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scrollbars="vertical" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/location"
+        android:textSize="20dp"
+        android:text="location"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/gauge"
+        android:text="nadi"
+        android:textSize="20dp"
+        android:layout_marginLeft="20dp"
+        />
 
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/based"
+        android:textSize="20dp"
+        android:text="based on"
+        android:layout_marginLeft="20dp"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/river"
+        android:textSize="20dp"
+        android:text="river"
+        android:layout_marginLeft="20dp"
+        />
 
 </LinearLayout>

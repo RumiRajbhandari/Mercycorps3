@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.user.mercycorpsfinal.R;
 import com.example.user.mercycorpsfinal.activity.CallListActivity;
@@ -20,10 +21,20 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.maps.android.data.Feature;
+import com.google.maps.android.data.Layer;
+import com.google.maps.android.data.geojson.GeoJsonLayer;
+import com.google.maps.android.data.kml.KmlContainer;
+import com.google.maps.android.data.kml.KmlLayer;
+import com.google.maps.android.data.kml.KmlPlacemark;
 
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -38,6 +49,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     ArrayList<LatLon> latLons;
     ArrayList<Contact> contacts;
     Contact contact;
+    KmlLayer layer;
 
     public MapFragment() {
         // Required empty public constructor
@@ -74,23 +86,85 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         mgoogleMap = googleMap;
         mgoogleMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(LayoutInflater.from(getContext())));
 
+        try {
+            layer = new KmlLayer(mgoogleMap, R.raw.majorriver, this.getContext());
+            layer.addLayerToMap();
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+       /* int i=0;
+        for (KmlPlacemark placemark : layer.getPlacemarks()) {
+            // Do something to Placemark
+            i++;
+            if(placemark.hasProperty("name")){
+                Log.e(TAG, "onMapReady: "+placemark.getProperty("name") );
+                Log.e(TAG, "onMapReady: "+i );
+            }
+        }*/
+
+       /* for (KmlContainer container : layer.getContainers()) {
+
+            if (container.hasProperty("name")) {
+                Log.e(TAG, "onMapReady: "+container.getProperty("name") );
+                System.out.println(container.getProperty("name"));
+            }
+        }*/
+        layer.setOnFeatureClickListener(new GeoJsonLayer.GeoJsonOnFeatureClickListener() {
+            @Override
+            public void onFeatureClick(Feature feature) {
+                Log.e(TAG, "onFeatureClick: "+feature.getProperty("name") );
+                Toast.makeText(getContext(), ""+feature.getProperty("name"), Toast.LENGTH_SHORT).show();
+               
+
+            }
+        });
+
+
         //Data prepare
 
         prepareData();
 
-        for (LatLon latlon : latLons
+        for (final LatLon latlon : latLons
                 ) {
             LatLng location = new LatLng(latlon.getLat(), latlon.getLon());
-            Log.e(TAG, "onMapReady: "+latlon.getGauze() );
-            mgoogleMap.addMarker(new MarkerOptions().position(location).title(latlon.getGauze()).snippet(latlon.getBasedOn()));
-            mgoogleMap.moveCamera(CameraUpdateFactory.newLatLng(location));
+            if (latlon.getGauze()=="नदि")
+            {
+                mgoogleMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.scale)).position(location).title(latlon.getGauze()).snippet(latlon.getBasedOn()));
+                mgoogleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                    @Override
+                    public boolean onMarkerClick(Marker marker) {
+                        marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.scale));
+                        marker.setSnippet(latlon.getBasedOn());
+                        return false;
+                    }
+                });
+            }
+            else {
+                mgoogleMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.drop1)).position(location).title(latlon.getGauze()).snippet(latlon.getBasedOn()));
+            }
 
+            mgoogleMap.moveCamera(CameraUpdateFactory.newLatLng(location));
+            mgoogleMap.setOnInfoWindowClickListener(this);
 
         }
         mgoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(28.8318, 80.51835), 10.0f));
-        mgoogleMap.setOnInfoWindowClickListener(this);
 
 
+
+        /*layer.setOnFeatureClickListener(new Layer.OnFeatureClickListener() {
+            @Override
+            public void onFeatureClick(Feature feature) {
+                if (feature!=null){
+
+                }
+                else {
+                    Log.e(TAG, "onFeatureClick: "+feature.getId() );
+                }
+
+            }
+        });*/
     }
 
 
