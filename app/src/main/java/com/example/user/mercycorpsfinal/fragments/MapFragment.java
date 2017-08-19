@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,7 +29,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.data.Feature;
 import com.google.maps.android.data.Layer;
 import com.google.maps.android.data.geojson.GeoJsonLayer;
-import com.google.maps.android.data.kml.KmlContainer;
 import com.google.maps.android.data.kml.KmlLayer;
 import com.google.maps.android.data.kml.KmlPlacemark;
 
@@ -42,14 +42,15 @@ import java.util.ArrayList;
  * A simple {@link Fragment} subclass.
  */
 public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener {
-    GoogleMap mgoogleMap;
+    GoogleMap mgoogleMap,sgoogleMap;
     MapView mMapView;
     View mView;
     String TAG = "TAG";
     ArrayList<LatLon> latLons;
     ArrayList<Contact> contacts;
     Contact contact;
-    KmlLayer layer;
+    KmlLayer layerRiver,layerSettlement;
+    Button btn_settlement;
 
     public MapFragment() {
         // Required empty public constructor
@@ -61,6 +62,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         mView = inflater.inflate(R.layout.fragment_map, container, false);
+
+
+
+
         return mView;
 
 
@@ -85,41 +90,67 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         MapsInitializer.initialize(getContext());
         mgoogleMap = googleMap;
         mgoogleMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(LayoutInflater.from(getContext())));
+        btn_settlement=(Button)mView.findViewById(R.id.btn_settlement);
+        btn_settlement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    mgoogleMap.clear();
+                    layerSettlement=new KmlLayer(mgoogleMap,R.raw.settlement,getContext());
+                } catch (XmlPullParserException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    layerSettlement.addLayerToMap();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (XmlPullParserException e) {
+                    e.printStackTrace();
+                }
+                Toast.makeText(getContext(), "btn clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         try {
-            layer = new KmlLayer(mgoogleMap, R.raw.majorriver, this.getContext());
-            layer.addLayerToMap();
+            layerRiver = new KmlLayer(mgoogleMap, R.raw.majorriver, this.getContext());
+            layerRiver.addLayerToMap();
+
         } catch (XmlPullParserException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-       /* int i=0;
-        for (KmlPlacemark placemark : layer.getPlacemarks()) {
-            // Do something to Placemark
-            i++;
-            if(placemark.hasProperty("name")){
-                Log.e(TAG, "onMapReady: "+placemark.getProperty("name") );
-                Log.e(TAG, "onMapReady: "+i );
-            }
-        }*/
 
-       /* for (KmlContainer container : layer.getContainers()) {
+        try{
+            layerRiver.setOnFeatureClickListener(new GeoJsonLayer.GeoJsonOnFeatureClickListener() {
+                @Override
+                public void onFeatureClick(Feature feature) {
+                    if (feature!=null){
+                        Log.e(TAG, "onFeatureClick: "+feature.getProperty("name") );
+                        Toast.makeText(getContext(), ""+feature.getProperty("name"), Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                    }
+                }
+            });
+        }catch (Exception e){
 
-            if (container.hasProperty("name")) {
-                Log.e(TAG, "onMapReady: "+container.getProperty("name") );
-                System.out.println(container.getProperty("name"));
-            }
-        }*/
-        layer.setOnFeatureClickListener(new GeoJsonLayer.GeoJsonOnFeatureClickListener() {
+        }
+
+      /*  layerSettlement.setOnFeatureClickListener(new Layer.OnFeatureClickListener() {
             @Override
             public void onFeatureClick(Feature feature) {
-                Log.e(TAG, "onFeatureClick: "+feature.getProperty("name") );
-                Toast.makeText(getContext(), ""+feature.getProperty("name"), Toast.LENGTH_SHORT).show();
-               
-
+                Toast.makeText(getContext(), ""+feature.getProperty("VIL_NAME"), Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
+      /*  layerSettlement.setOnFeatureClickListener(new GeoJsonLayer.GeoJsonOnFeatureClickListener() {
+            @Override
+            public void onFeatureClick(Feature feature) {
+                Toast.makeText(getContext(), ""+feature.getProperty("VIL_NAME"), Toast.LENGTH_SHORT).show();
+            }
+        });*/
 
 
         //Data prepare
@@ -131,19 +162,21 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
             LatLng location = new LatLng(latlon.getLat(), latlon.getLon());
             if (latlon.getGauze()=="नदि")
             {
-                mgoogleMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.scale)).position(location).title(latlon.getGauze()).snippet(latlon.getBasedOn()));
-                mgoogleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-                    @Override
-                    public boolean onMarkerClick(Marker marker) {
-                        marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.scale));
-                        marker.setSnippet(latlon.getBasedOn());
-                        return false;
-                    }
-                });
+                mgoogleMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.scale)).position(location).title(latlon.getContacts().get(0).getName()).snippet(latlon.getLocation()+"\n"+latlon.getRiver()));
+
             }
             else {
-                mgoogleMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.drop1)).position(location).title(latlon.getGauze()).snippet(latlon.getBasedOn()));
+                mgoogleMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.drop1)).position(location).title(latlon.getContacts().get(0).getName()).snippet(latlon.getLocation()+"\n"+latlon.getRiver()));
+
             }
+            mgoogleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                @Override
+                public boolean onMarkerClick(Marker marker) {
+                   // marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.scale));
+                    marker.setSnippet(latlon.getLocation()+"\n"+latlon.getRiver());
+                    return false;
+                }
+            });
 
             mgoogleMap.moveCamera(CameraUpdateFactory.newLatLng(location));
             mgoogleMap.setOnInfoWindowClickListener(this);
@@ -153,7 +186,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
 
 
 
-        /*layer.setOnFeatureClickListener(new Layer.OnFeatureClickListener() {
+        /*layerRiver.setOnFeatureClickListener(new Layer.OnFeatureClickListener() {
             @Override
             public void onFeatureClick(Feature feature) {
                 if (feature!=null){
@@ -171,7 +204,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
 
     @Override
     public void onInfoWindowClick(Marker marker) {
-        Log.e("TAG", "onInfoWindowClick: hello");
+        Log.e("TAG", "onInfoWindowClick: hello"+marker.getId());
         String[] str = marker.getId().split("m");
         LatLon l1 = latLons.get(Integer.parseInt(str[1]));
 
