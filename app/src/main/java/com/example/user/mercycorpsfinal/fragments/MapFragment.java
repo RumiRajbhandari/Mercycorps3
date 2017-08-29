@@ -175,8 +175,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     public void onInfoWindowClick(Marker marker) {
         Log.e("TAG", "onInfoWindowClick: hello"+marker.getId());
         String[] str = marker.getId().split("m");
-        LatLon l1 = latLons.get((Integer.parseInt(str[1]))%37);
-        Log.e(TAG, "onInfoWindowClick: id is"+(Integer.parseInt(str[1]))%37 );
+        LatLon l1 = latLons.get((Integer.parseInt(str[1]))%latLons.size());
+        Log.e(TAG, "onInfoWindowClick: id is"+(Integer.parseInt(str[1]))%latLons.size() );
 
         Intent intent=new Intent(getContext(),CallListActivity.class);
         intent.putExtra("rumi",(Serializable)l1);
@@ -210,7 +210,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
             int markerId = -1;
 
 
-            LatLon l1 = latLons.get((Integer.parseInt(str[1])%37));
+            LatLon l1 = latLons.get((Integer.parseInt(str[1])%latLons.size()));
             //Log.e("TAG", "getInfoContents:id is "+marker.getId() );
             name.setText(l1.getContacts().get(0).getName());
             location.setText(l1.getLocation());
@@ -506,6 +506,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         contacts.add(contact);
         latLon = new LatLon("जलबायु तथा मौसम बिभाग","वर्षा", "","डी एच एम आधारित", 80.55997,28.81271, contacts);
         latLons.add(36, latLon);
+
+        contacts=new ArrayList<Contact>();
+        contact=new Contact("Dine Tamang","9841418905");
+        contacts.add(contact);
+        latLon = new LatLon("Mercy Corpse","वर्षा", "","INGO", 80.55,29.00, contacts);
+        latLons.add(37, latLon);
 
     }
 }

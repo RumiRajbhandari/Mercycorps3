@@ -7,4 +7,5 @@
     <color name="white">#fff</color>
     <color name="textPrimary">#FFFFFF</color>
     <color name="transparent">#00FFFFFF</color>
+    <color name="tabTextInactive">#000</color>
 </resources>

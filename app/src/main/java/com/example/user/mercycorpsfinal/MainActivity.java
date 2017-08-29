@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.example.user.mercycorpsfinal.fragments.DHMFragment;
+import com.example.user.mercycorpsfinal.fragments.EmergencyNumbers;
 import com.example.user.mercycorpsfinal.fragments.ImportantContactsFragment;
 import com.example.user.mercycorpsfinal.fragments.MapFragment;
 
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragment(new MapFragment(), "म्याप");
         adapter.addFragment(new ImportantContactsFragment(), "विषय सूची ");
         adapter.addFragment(new DHMFragment(),"DHM");
+        adapter.addFragment(new EmergencyNumbers(),"Emergency Numbers");
         viewPager.setAdapter(adapter);
     }
 }

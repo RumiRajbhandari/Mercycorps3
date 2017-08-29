@@ -34,7 +34,7 @@ public class CallListActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>मर्सी कोर्प्स</font>"));
+        getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>मर्सी कोर</font>"));
 
         latLon = new LatLon();
 
