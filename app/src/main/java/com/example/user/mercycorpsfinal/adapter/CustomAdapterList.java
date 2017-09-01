@@ -13,7 +13,8 @@ import com.example.user.mercycorpsfinal.model.ListItem;
 import java.util.List;
 
 public class CustomAdapterList extends RecyclerView.Adapter<CustomAdapterList.CustomViewHolder> {
-    List<ListItem> entityArrayList;
+  private   List<ListItem> entityArrayList;
+
     private final OnItemClickListener listener;
 
     public interface OnItemClickListener {
@@ -36,6 +37,8 @@ public class CustomAdapterList extends RecyclerView.Adapter<CustomAdapterList.Cu
     public CustomAdapterList(List<ListItem> entityArrayList, OnItemClickListener listener) {
         this.entityArrayList = entityArrayList;
         this.listener = listener;
+
+
     }
 
     @Override
@@ -70,10 +73,16 @@ public class CustomAdapterList extends RecyclerView.Adapter<CustomAdapterList.Cu
         }
 
         public void bind(final ListItem listItem, final OnItemClickListener listener) {
-            tv_Org.setText(listItem.getOrgName());
-            tv_Name.setText(listItem.getPerson());
-            tv_phoneNo.setText(listItem.getPhoneNo());
-            tv_mobNo.setText(listItem.getMobNo());
+
+                    tv_mobNo.setVisibility(View.VISIBLE);
+                    tv_Name.setVisibility(View.VISIBLE);
+                    tv_phoneNo.setVisibility(View.VISIBLE);
+                    tv_Org.setVisibility(View.VISIBLE);
+                    tv_Org.setText(listItem.getOrganization());
+                    tv_Name.setText(listItem.getPerson());
+                    tv_phoneNo.setText(listItem.getLandline());
+                    tv_mobNo.setText(listItem.getMob());
+
 
 
 
@@ -83,8 +92,9 @@ public class CustomAdapterList extends RecyclerView.Adapter<CustomAdapterList.Cu
                     listener.onItemClick(listItem);
                 }
             });
-        }
+
     }
+        }
 
 
 }

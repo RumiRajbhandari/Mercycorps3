@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.user.mercycorpsfinal.activity.SplashActivity">
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/logo"
+        android:layout_marginBottom="72dp"
+        android:layout_above="@+id/textView"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="सहयोग"
+        android:id="@+id/textView"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_above="@+id/imageView2"
+        android:layout_centerHorizontal="true" />
+    <ImageView
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:src="@drawable/dhm"
+        android:id="@+id/imageView"
+        android:layout_above="@+id/linearLayout"
+        android:layout_alignParentStart="true" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/linearLayout"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/imageView">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="जिल्ला आपत्कालिन संचालन केन्द्र"
+            android:id="@+id/textView3"
+            android:textStyle="bold"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="महेन्द्रनगर, कंचनपुर "
+            android:id="@+id/text5"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="जल तथा मौसम विज्ञान विभागा"
+            android:id="@+id/textView2"
+            android:textStyle="bold"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="अत्तरिया"
+            android:id="@+id/textView4" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/mercycorps"
+        android:id="@+id/imageView2"
+        android:layout_above="@+id/linearLayout"
+        android:layout_toEndOf="@+id/textView" />
+
+</RelativeLayout>

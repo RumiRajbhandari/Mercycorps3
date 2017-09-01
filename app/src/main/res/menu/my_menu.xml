@@ -1,42 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    >
-    <group android:checkableBehavior="all">
-
-
-
-    <item
-        android:title=""/>
-        <item
-            android:title=""/>
-        <item
-            android:icon="@drawable/ic_home_black_24dp"
-            android:title="Home"
-
-            />
-        <item
-            android:icon="@drawable/callall"
-            android:title="DHM Toll Free No: 1155"/>
-
-
-
-
-
-    <item
-        android:icon="@drawable/ic_assignment_black_24dp"
-        android:title="Communication Channel"
-        android:id="@+id/commCha"
-        />
-    </group>
-
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/AboutUs"
         android:title="About Us"
-
-
-        />
-
-
-
-
-
+        android:showAsAction="ifRoom|withText"
+        android:icon="@drawable/ic_action_overflow"/>
 </menu>

@@ -53,7 +53,7 @@ public class ImportantContactsFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         lv = (ListView) mView.findViewById(R.id.listView);
-        adapter = new ArrayAdapter<String>(getActivity(),R.layout.activity_main_list_item, listItems);
+        adapter = new ArrayAdapter<String>(getActivity(), R.layout.activity_main_list_item, listItems);
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

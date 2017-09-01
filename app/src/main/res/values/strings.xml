@@ -5,4 +5,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_maps">Map</string>
     <string name="txt">lhNnf b}=k|=p=;ldlt÷lhNnf k|zf;g sfof{no</string>
+    <string name="drawer_open">open</string>
+    <string name="drawer_close">close</string>
 </resources>

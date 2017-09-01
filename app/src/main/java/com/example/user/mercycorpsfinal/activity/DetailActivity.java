@@ -34,28 +34,28 @@ public class DetailActivity extends AppCompatActivity {
         initializeViews();
         Intent intent=getIntent();
         listItem= (ListItem) intent.getSerializableExtra("data");
-        tvDetOrg.setText(listItem.getOrgName());
+        tvDetOrg.setText(listItem.getOrganization());
         tvDetPerson.setText(listItem.getPerson());
-        tvDetPhoneNo.setText(listItem.getMobNo());
-        tvDetMobNo.setText(listItem.getPhoneNo());
+        tvDetPhoneNo.setText(listItem.getMob());
+        tvDetMobNo.setText(listItem.getLandline());
         ImgBtnCallPh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                giveCall(listItem.getMobNo());
+                giveCall(listItem.getMob());
             }
         });
 
         ImgCallBtnMob.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                giveCalllTo(listItem.getPhoneNo());
+                giveCalllTo(listItem.getLandline());
             }
         });
 
         ImgCallBtnMsgPh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sendMessage(listItem.getPhoneNo());
+                sendMessage(listItem.getLandline());
             }
         });
 
@@ -89,7 +89,7 @@ public class DetailActivity extends AppCompatActivity {
 
 
 
-    private void giveCalllTo(String phoneNo) {
+    public void giveCalllTo(String phoneNo) {
         Intent callIntent = new Intent(Intent.ACTION_CALL);
         callIntent.setData(Uri.parse("tel:" + phoneNo));
         if (ActivityCompat.checkSelfPermission(DetailActivity.this, android.Manifest.permission.CALL_PHONE) !=
@@ -100,7 +100,7 @@ public class DetailActivity extends AppCompatActivity {
         startActivity(callIntent);
     }
 
-    private void giveCall(String mobNo) {
+    public void giveCall(String mobNo) {
         Intent callIntent = new Intent(Intent.ACTION_CALL);
         callIntent.setData(Uri.parse("tel:" + mobNo));
         if (ActivityCompat.checkSelfPermission(DetailActivity.this, android.Manifest.permission.CALL_PHONE) !=

@@ -1,5 +1,7 @@
 package com.example.user.mercycorpsfinal.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 /**
@@ -7,22 +9,38 @@ import java.io.Serializable;
  */
 
 public class ListItem implements Serializable {
-    String orgName,person;
-    String phoneNo,mobNo;
+    @SerializedName("id")
 
-    public ListItem(String orgName, String person, String phoneNo, String mobNo) {
-        this.orgName = orgName;
+    private String id;
+
+    @SerializedName("organization")
+    private  String organization;
+
+    @SerializedName("person")
+
+    private String person;
+
+    @SerializedName("mob")
+    private String mob;
+
+    @SerializedName("landline")
+    private String landline;
+
+    public ListItem(){}
+    public ListItem(String person, String organization, String landline, String mob) {
+//        this.id = id;
         this.person = person;
-        this.phoneNo = phoneNo;
-        this.mobNo = mobNo;
+        this.organization = organization;
+        this.landline = landline;
+        this.mob = mob;
     }
 
-    public String getOrgName() {
-        return orgName;
+    public String getId() {
+        return id;
     }
 
-    public void setOrgName(String orgName) {
-        this.orgName = orgName;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getPerson() {
@@ -33,19 +51,27 @@ public class ListItem implements Serializable {
         this.person = person;
     }
 
-    public String getPhoneNo() {
-        return phoneNo;
+    public String getOrganization() {
+        return organization;
     }
 
-    public void setPhoneNo(String phoneNo) {
-        this.phoneNo = phoneNo;
+    public void setOrganization(String organization) {
+        this.organization = organization;
     }
 
-    public String getMobNo() {
-        return mobNo;
+    public String getLandline() {
+        return landline;
     }
 
-    public void setMobNo(String mobNo) {
-        this.mobNo = mobNo;
+    public void setLandline(String landline) {
+        this.landline = landline;
+    }
+
+    public String getMob() {
+        return mob;
+    }
+
+    public void setMob(String mob) {
+        this.mob = mob;
     }
 }

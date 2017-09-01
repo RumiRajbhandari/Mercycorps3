@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.user.mercycorpsfinal">
 
-
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.SEND_SMS" />
@@ -15,21 +14,14 @@
         android:label="मर्सी कोर"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--
-             The API key for Google Maps-based APIs is defined as a string resource.
-             (See the file "res/values/google_maps_api.xml").
-             Note that the API key is linked tothe encryption key used to sign the APK.
-             You need a different API key for each encryption key, including the release key that is used to
-             sign the APK for publishing.
-             You can define the keys for the debug and release targets in src/debug/ and src/release/. 
-        -->
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
@@ -40,7 +32,33 @@
         <activity android:name=".activity.CallListActivity" />
         <activity
             android:name=".activity.DetailActivity"
-            android:label=""></activity>
+            android:label="" />
+        <activity android:name=".activity.ApatkalinAwasthaActivity" />
+        <activity android:name=".activity.GairSarkariSasthaActivity" />
+        <activity android:name=".activity.SuchanaBewasthapan5Activity" />
+        <activity android:name=".activity.Sheet3" />
+        <activity android:name=".activity.Sheet6" />
+        <activity android:name=".activity.Sheet7" />
+        <activity android:name=".activity.Sheet8" />
+        <activity android:name=".activity.Sheet9" />
+        <activity android:name=".activity.Sheet10" />
+        <activity android:name=".activity.Sheet11" />
+        <activity android:name=".activity.Sheet12" />
+        <activity android:name=".activity.Sheet13" />
+        <activity android:name=".activity.Sheet14" />
+        <activity android:name=".activity.Sheet15" />
+        <activity android:name=".activity.Sheet16" />
+        <activity android:name=".activity.Sheet17" />
+        <activity android:name=".activity.Sheet18" />
+        <activity android:name=".activity.Sheet19" />
+        <activity android:name=".activity.Sheet20" />
+        <activity android:name=".activity.Sheet21" />
+        <activity
+            android:name=".MainActivity"
+            android:icon="@mipmap/ic_launcher"
+            android:supportsRtl="true"
+            android:uiOptions="splitActionBarWhenNarrow" />
+        <activity android:name=".activity.AboutUsActivity"></activity>
     </application>
 
 </manifest>
