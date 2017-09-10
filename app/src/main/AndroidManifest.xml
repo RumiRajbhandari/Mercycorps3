@@ -11,9 +11,10 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="मर्सी कोर"
+        android:label="EWS Pocket Diary"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:largeHeap="true">
         <activity android:name=".activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -53,6 +54,7 @@
         <activity android:name=".activity.Sheet19" />
         <activity android:name=".activity.Sheet20" />
         <activity android:name=".activity.Sheet21" />
+        <activity android:name=".activity.CommunicationActivity" />
         <activity
             android:name=".MainActivity"
             android:icon="@mipmap/ic_launcher"

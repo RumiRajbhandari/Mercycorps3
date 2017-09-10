@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document id="Feature_shp1" xsi:schemaLocation="http://www.opengis.net/kml/2.2 http://schemas.opengis.net/kml/2.2.0/ogckml22.xsd http://www.google.com/kml/ext/2.2 http://code.google.com/apis/kml/schema/kml22gx.xsd">
+	<name>Feature_shp1</name>
+	<open>1</open>
+	<Snippet maxLines="0"></Snippet>
+	<GroundOverlay id="0">
+		<name>Feature_shp1</name>
+		<Snippet maxLines="0"></Snippet>
+		<color>adffffff</color>
+		<drawOrder>1000</drawOrder>
+		<Icon>
+			<href>Layer0_0.png</href>
+		</Icon>
+		<LatLonBox>
+			<north>29.02009839189039</north>
+			<south>28.33888612675268</south>
+			<east>81.23091929857333</east>
+			<west>80.22817484429061</west>
+		</LatLonBox>
+	</GroundOverlay>
+</Document>
+</kml>

@@ -1,8 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    >
+    <group android:checkableBehavior="all">
+
+
+
+    <item
+        android:title=""/>
+        <item
+            android:title=""/>
+        <item
+            android:id="@+id/home"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="Home"
+
+            />
+        <item
+            android:id="@+id/apatkalin"
+            android:icon="@drawable/callall"
+            android:title="आपतकालिन अवस्थाम"/>
+
+        <item
+        android:icon="@drawable/ic_assignment_black_24dp"
+        android:title="Communication Channel"
+        android:id="@+id/commCha"
+        />
+    </group>
+
     <item android:id="@+id/AboutUs"
         android:title="About Us"
-        android:showAsAction="ifRoom|withText"
-        android:icon="@drawable/ic_action_overflow"/>
+
+
+        />
+
+
+
+
+
 </menu>

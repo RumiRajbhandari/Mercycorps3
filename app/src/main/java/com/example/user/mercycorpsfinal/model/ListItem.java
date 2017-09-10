@@ -9,9 +9,9 @@ import java.io.Serializable;
  */
 
 public class ListItem implements Serializable {
-    @SerializedName("id")
-
-    private String id;
+//    @SerializedName("id")
+//
+//    private String id;
 
     @SerializedName("organization")
     private  String organization;
@@ -21,27 +21,31 @@ public class ListItem implements Serializable {
     private String person;
 
     @SerializedName("mob")
-    private String mob;
 
+    private String mob;
     @SerializedName("landline")
     private String landline;
 
+
+
     public ListItem(){}
-    public ListItem(String person, String organization, String landline, String mob) {
+
+    public ListItem(String organization, String person, String mob, String landline) {
 //        this.id = id;
         this.person = person;
         this.organization = organization;
-        this.landline = landline;
+
         this.mob = mob;
+        this.landline = landline;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
+//    public String getId() {
+//        return id;
+//    }
+//
+//    public void setId(String id) {
+//        this.id = id;
+//    }
 
     public String getPerson() {
         return person;

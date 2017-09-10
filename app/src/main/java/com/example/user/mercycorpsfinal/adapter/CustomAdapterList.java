@@ -74,14 +74,29 @@ public class CustomAdapterList extends RecyclerView.Adapter<CustomAdapterList.Cu
 
         public void bind(final ListItem listItem, final OnItemClickListener listener) {
 
-                    tv_mobNo.setVisibility(View.VISIBLE);
-                    tv_Name.setVisibility(View.VISIBLE);
-                    tv_phoneNo.setVisibility(View.VISIBLE);
-                    tv_Org.setVisibility(View.VISIBLE);
+
+            if(listItem.getLandline()!=null && !listItem.getLandline().isEmpty())
+            {
+                tv_phoneNo.setVisibility(View.VISIBLE);
+                tv_phoneNo.setText(listItem.getLandline());
+            }
+            else
+            {
+                tv_phoneNo.setVisibility(View.GONE);
+            }
+                if( listItem.getMob()!=null && !listItem.getMob().isEmpty()) {
+                      tv_mobNo.setVisibility(View.VISIBLE);
+                    tv_mobNo.setText(listItem.getMob());
+                }
+                else {
+                    tv_mobNo.setVisibility(View.GONE);
+
+                }
+
                     tv_Org.setText(listItem.getOrganization());
                     tv_Name.setText(listItem.getPerson());
-                    tv_phoneNo.setText(listItem.getLandline());
-                    tv_mobNo.setText(listItem.getMob());
+
+
 
 
 

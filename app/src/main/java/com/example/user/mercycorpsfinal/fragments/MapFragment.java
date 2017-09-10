@@ -1,8 +1,12 @@
 package com.example.user.mercycorpsfinal.fragments;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -10,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,20 +27,27 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.GroundOverlay;
+import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.data.Feature;
-import com.google.maps.android.data.Layer;
 import com.google.maps.android.data.geojson.GeoJsonLayer;
+import com.google.maps.android.data.kml.KmlContainer;
 import com.google.maps.android.data.kml.KmlLayer;
+import com.google.maps.android.data.kml.KmlMultiGeometry;
 import com.google.maps.android.data.kml.KmlPlacemark;
+import com.google.maps.android.data.kml.KmlPoint;
 
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -51,11 +61,14 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     public ArrayList<LatLon> latLons;
     public ArrayList<Contact> contacts;
     public Contact contact;
-    public KmlLayer layerRiver,layerSettlement;
+    public KmlLayer layerRiver,layerSettlement,layerInundation;
     public Button btn_settlement,ews;
     List<Marker> markers;
     List<Marker> markerSettlement;
     Marker m;
+    GroundOverlay imageOverlay;
+    Handler mHandler;
+    Thread thread;
 
     public MapFragment() {
         // Required empty public constructor
@@ -102,35 +115,23 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
             public void onClick(View v) {
 
                 for (Marker marker: markers
-                     ) {
+                        ) {
                     marker.setVisible(false);
                 }
-                try {
+                LatLngBounds inun = new LatLngBounds(
+                        new LatLng(28.33888612675268, 80.22817484429061),       // South west corner
+                        new LatLng(29.02009839189039, 81.23091929857333));      // North east corner
+                GroundOverlayOptions inunMap = new GroundOverlayOptions()
+                        .image(BitmapDescriptorFactory.fromResource(R.drawable.layer1))
+                        .positionFromBounds(inun);
 
-                    // mgoogleMap.clear();
-                    layerSettlement=new KmlLayer(mgoogleMap,R.raw.settlementlayer,getContext());
-                } catch (XmlPullParserException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    layerSettlement.addLayerToMap();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (XmlPullParserException e) {
-                    e.printStackTrace();
-                }
-
-               mgoogleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
-                   @Override
-                   public void onInfoWindowClick(Marker marker) {
-
-                   }
-               });
+                // GroundOverlay imageOverlay = mgoogleMap.addGroundOverlay(inunMap);
+                imageOverlay = mgoogleMap.addGroundOverlay(inunMap);
+                prepareSettlement();
 
             }
         });
+
 
         ews.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -138,7 +139,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
                 if (layerSettlement!=null){
                     layerSettlement.removeLayerFromMap();
                 }
-
+                imageOverlay.remove();
                 mgoogleMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(LayoutInflater.from(getContext())));
                 //mgoogleMap.clear();
 
@@ -220,6 +221,45 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         }
     }
 
+    public boolean isInternetAvailable() throws IOException, InterruptedException {
+        final ConnectivityManager connMgr = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetworkInfo = connMgr.getActiveNetworkInfo();
+
+        if (activeNetworkInfo != null) { // connected to the internet
+            Toast.makeText(getContext(), activeNetworkInfo.getTypeName(), Toast.LENGTH_SHORT).show();
+
+            if (activeNetworkInfo.getType() == ConnectivityManager.TYPE_WIFI) {
+                // connected to wifi
+                return true;
+            } else if (activeNetworkInfo.getType() == ConnectivityManager.TYPE_MOBILE) {
+                // connected to the mobile provider's data plan
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void internetAvailable(){
+        try {
+
+            // mgoogleMap.clear();
+            layerSettlement=new KmlLayer(mgoogleMap,R.raw.settlementone,getContext());
+
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            layerSettlement.addLayerToMap();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void prepareEws(){
 
 
@@ -283,6 +323,132 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         }
     }
 
+    public void prepareSettlement(){
+
+        try {
+
+            if (isInternetAvailable()){
+                internetAvailable();
+            }
+            else {
+                Toast.makeText(getContext(), "Please connect the internet.", Toast.LENGTH_SHORT).show();
+               /* final Handler handler = new Handler();
+                final Runnable task = new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            while (!isInternetAvailable()){
+
+                            }
+                            if (isInternetAvailable()){
+                                internetAvailable();
+                                Log.e(TAG, "run: " );
+
+                            }
+                        } catch (IOException e) {
+
+                        } catch (InterruptedException e) {
+
+                        }
+                        Log.e(TAG, "run: r" );
+                        //code you want to run every second
+
+                    }
+                };
+                handler.postDelayed(task, 1000);*/
+                      /*  while (isInternetAvailable()!=true){
+                            Log.e(TAG, "onClick: " );
+                            isInternetAvailable();
+                        }*/
+                // internetAvailable();
+                       /* mHandler=new Handler();
+                        thread=new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    while (isInternetAvailable()!=true){
+                                        //Log.e(TAG, "onClick: hello" );
+                                       mHandler.post(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                try {
+                                                    isInternetAvailable();
+                                                } catch (IOException e) {
+
+                                                } catch (InterruptedException e) {
+
+                                                }
+                                            }}
+                                        );
+                                       // internetAvailable();
+                                    }
+                                    internetAvailable();
+                                } catch (IOException e) {
+
+                                } catch (InterruptedException e) {
+
+                                }
+                            }
+                        });
+                        thread.start();
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    isInternetAvailable();
+                                } catch (IOException e) {
+
+                                } catch (InterruptedException e) {
+
+                                }
+                            }});*/
+
+
+
+            }
+        } catch (IOException e) {
+
+        } catch (InterruptedException e) {
+
+        }
+
+
+
+
+        mgoogleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                Log.e(TAG, "onInfoWindowClick: hello" );
+            }
+        });
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        final Handler handler = new Handler();
+        final Runnable task = new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    if (isInternetAvailable()){
+                        internetAvailable();
+                        Log.e(TAG, "run: " );
+                    }
+                } catch (IOException e) {
+
+                } catch (InterruptedException e) {
+
+                }
+                //code you want to run every second
+
+            }
+        };
+        handler.postDelayed(task, 1000);
+        task.run();
+
+
+
+    }
     public void prepareData() {
         latLons = new ArrayList<LatLon>();
         contacts=new ArrayList<Contact>();
@@ -514,6 +680,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         latLons.add(37, latLon);
 
     }
+
+
 }
 
 

@@ -16,7 +16,7 @@ import com.example.user.mercycorpsfinal.R;
 import com.example.user.mercycorpsfinal.activity.GairSarkariSasthaActivity;
 import com.example.user.mercycorpsfinal.activity.Sheet10;
 import com.example.user.mercycorpsfinal.activity.Sheet11;
-import com.example.user.mercycorpsfinal.activity.Sheet12;
+import com.example.user.mercycorpsfinal.activity.Sheet3;
 import com.example.user.mercycorpsfinal.activity.Sheet6;
 import com.example.user.mercycorpsfinal.activity.Sheet7;
 import com.example.user.mercycorpsfinal.activity.Sheet8;
@@ -86,7 +86,7 @@ public class ClusterFragment extends Fragment {
                     case 7 :intent = new Intent(getActivity(), Sheet11.class);
                         startActivity(intent);
                         break;
-                    case 8 :intent = new Intent(getActivity(), Sheet12.class);
+                    case 8 :intent = new Intent(getActivity(), Sheet3.class);
                         startActivity(intent);
                         break;
 

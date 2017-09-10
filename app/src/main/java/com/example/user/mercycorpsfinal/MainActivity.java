@@ -1,6 +1,5 @@
 package com.example.user.mercycorpsfinal;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -15,22 +14,21 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.example.user.mercycorpsfinal.activity.AboutUsActivity;
+import com.example.user.mercycorpsfinal.activity.ApatkalinAwasthaActivity;
+import com.example.user.mercycorpsfinal.activity.CommunicationActivity;
 import com.example.user.mercycorpsfinal.fragments.ClusterFragment;
 import com.example.user.mercycorpsfinal.fragments.DHMFragment;
 import com.example.user.mercycorpsfinal.fragments.EWSResponse;
 import com.example.user.mercycorpsfinal.fragments.EmergencyNumbers;
 import com.example.user.mercycorpsfinal.fragments.GaugeReaderFragment;
-import com.example.user.mercycorpsfinal.fragments.ImportantContactsFragment;
 import com.example.user.mercycorpsfinal.fragments.MapFragment;
 
 import java.util.ArrayList;
@@ -50,14 +48,46 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
 
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 
-      /*  toggle = new ActionBarDrawerToggle(this, drawerLayout,toolbar,R.string.drawer_open, R.string.drawer_close) {
+        drawerLayout = (DrawerLayout)findViewById(R.id.drawer);
+        img_drawer=(ImageView)drawerLayout.findViewById(R.id.image_view);
+
+        navigationView = (NavigationView)findViewById(R.id.navigation);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+                menuItem.setChecked(true);
+                Intent intent;
+                switch (menuItem.getItemId()){
+                    case  R.id.home:
+                        intent =new Intent(MainActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        break;
+                    case R.id.apatkalin:
+                        intent =new Intent(MainActivity.this, ApatkalinAwasthaActivity.class);
+                        startActivity(intent);
+                        break;
+
+                    case R.id.commCha:
+                        intent=new Intent(MainActivity.this, CommunicationActivity.class);
+                        startActivity(intent);
+                        break;
+
+
+
+                }
+
+                return false;
+            }
+        });
+        toggle = new ActionBarDrawerToggle(this, drawerLayout,toolbar,R.string.drawer_open, R.string.drawer_close) {
 
             @Override
             public void onDrawerOpened(View drawerView) {
@@ -73,7 +103,8 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         drawerLayout.setDrawerListener(toggle);
-        toggle.syncState();*/
+        toggle.syncState();
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,6 +150,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 }
+
 class ViewPagerAdapter extends FragmentPagerAdapter {
     private final List<Fragment> mFragmentList = new ArrayList<>();
     private final List<String> mFragmentTitleList = new ArrayList<>();

@@ -33,7 +33,6 @@
     <TextView
         android:id="@+id/det_org"
         android:text="orga"
-
         android:textSize="18sp"
         android:textStyle="bold"
         android:layout_width="match_parent"
@@ -49,6 +48,7 @@
         android:layout_height="wrap_content" />
 
     <RelativeLayout
+        android:id="@+id/r1_mob"
         android:padding="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -57,13 +57,10 @@
         >
 
 
-
         <TextView
             android:id="@+id/mob"
-
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:text="Phone No"
             android:textSize="20sp"
             />
 
@@ -77,11 +74,11 @@
             android:layout_marginRight="39dp"
             android:layout_marginEnd="39dp"
             android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/mail"
-            android:layout_toStartOf="@+id/mail" />
+            android:layout_toLeftOf="@+id/mesage_mob"
+            android:layout_toStartOf="@+id/mesage_mob" />
 
         <ImageButton
-            android:id="@+id/mail"
+            android:id="@+id/mesage_mob"
             android:src="@drawable/mail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -101,7 +98,8 @@
 
     </RelativeLayout>
     <RelativeLayout
-android:padding="5dp"
+        android:id="@+id/r2_phone"
+        android:padding="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="16dp"
@@ -114,8 +112,6 @@ android:padding="5dp"
             android:id="@+id/phone"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:text="Phone No"
-
             android:textSize="20sp"
             />
 
@@ -128,26 +124,17 @@ android:padding="5dp"
             android:background="#00000000"
             android:layout_marginRight="39dp"
             android:layout_marginEnd="39dp"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/mailPhone"
-            android:layout_toStartOf="@+id/mailPhone" />
-
-        <ImageButton
-            android:id="@+id/mailPhone"
-            android:src="@drawable/mail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#00000000"
-            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            />
+
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:background="#ccc"
-            android:layout_below="@+id/mailPhone"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
+           android:layout_below="@+id/callPhone"
             android:layout_marginTop="20dp"/>
 
     </RelativeLayout>

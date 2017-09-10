@@ -8,17 +8,15 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.user.mercycorpsfinal.model.ListItem;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by root on 7/27/17.
- */
+
 public class DatabaseHandler extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 4;
-    private static final String DATABASE_NAME = "mercycorp";
+    private static final String DATABASE_NAME = "PocketDictionary";
     private static final String TABLE_USERS = "contact";
-//    private static final String KEY_ID="userId";
     private static final String KEY_ID="_id";
     private static final String KEY_ORGNATIZATION="organization";
     private static final String KEY_PERSON="person";
@@ -38,7 +36,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String CREATE_USERS_TABLE= "CREATE TABLE " + TABLE_USERS + "("
                 + KEY_ID + " TEXT," + KEY_ORGNATIZATION
-                + " TEXT," + KEY_PERSON + " TEXT " + KEY_LANDLINE + "TEXT"+ KEY_MOB + "TEXT" + ")";
+                + " TEXT," + KEY_PERSON + " TEXT," + KEY_MOB + "TEXT,"+ KEY_LANDLINE + "TEXT" + ")";
         db.execSQL(CREATE_USERS_TABLE);
     }
 
@@ -53,13 +51,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
    public void addUser(ListItem user){
         SQLiteDatabase db=this.getWritableDatabase();
         ContentValues values=new ContentValues();
-        values.put(KEY_ID,user.getId());
+//        values.put(KEY_ID,user.getId());
         values.put(KEY_ORGNATIZATION,user.getOrganization());
         values.put(KEY_PERSON,user.getPerson());
-        values.put(KEY_LANDLINE,user.getLandline());
-        values.put(KEY_MOB,user.getMob());
+       values.put(KEY_MOB,user.getMob());
+       values.put(KEY_LANDLINE,user.getLandline());
 
-        db.insert(TABLE_USERS,null,values);
+
+
+
+       db.insert(TABLE_USERS,null,values);
         db.close();
     }
 
@@ -71,16 +72,20 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
        if (cursor.moveToFirst()){
            do{
-               ListItem user=new ListItem();
-               user.setId(cursor.getString(0));
-               user.setOrganization(cursor.getString(1));
-               user.setPerson(cursor.getString(2));
-               user.setLandline(cursor.getString(3));
-               user.setMob(cursor.getString(4));
-               userList.add(user);
+//               ListItem user=new ListItem(); user.setId(cursor.getString(0));
+////
+//               user.setOrganization(cursor.getString(1));
+//               user.setPerson(cursor.getString(2));
+//               user.setMob(cursor.getString(3));
+//               user.setLandline(cursor.getString(4));
+//               userList.add(user);
            }while (cursor.moveToNext());
 
        }
        return userList;
    }
+    public  boolean doesDatabaseExist(Context context, String dbName) {
+        File dbFile = context.getDatabasePath(dbName);
+        return dbFile.exists();
+    }
 }

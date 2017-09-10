@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.user.mercycorpsfinal.R;
@@ -24,6 +25,7 @@ public class DetailActivity extends AppCompatActivity {
     ListItem listItem;
     ImageButton ImgBtnCallPh,ImgCallBtnMob,ImgCallBtnMsgPh,ImgCallBtnMsgMob;
     private Toolbar toolbar;
+    RelativeLayout r1,r2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,34 +35,72 @@ public class DetailActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         initializeViews();
         Intent intent=getIntent();
+        r1=(RelativeLayout)findViewById(R.id.r1_mob);
+        r2=(RelativeLayout)findViewById(R.id.r2_phone);
+
         listItem= (ListItem) intent.getSerializableExtra("data");
-        tvDetOrg.setText(listItem.getOrganization());
-        tvDetPerson.setText(listItem.getPerson());
-        tvDetPhoneNo.setText(listItem.getMob());
-        tvDetMobNo.setText(listItem.getLandline());
-        ImgBtnCallPh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                giveCall(listItem.getMob());
-            }
-        });
 
-        ImgCallBtnMob.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                giveCalllTo(listItem.getLandline());
-            }
-        });
+        if(listItem.getMob()!=null && !listItem.getMob().isEmpty()){
+            r1.setVisibility(View.VISIBLE);
+            tvDetMobNo.setText(listItem.getMob());
 
-        ImgCallBtnMsgPh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                sendMessage(listItem.getLandline());
-            }
-        });
+            ImgCallBtnMob.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    giveCalllTo(listItem.getMob());
+                }
+            });
+                ImgCallBtnMsgMob.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        sendMessage(listItem.getMob());
+                    }
+                });
 
+        }
+        else
+        {
+            r1.setVisibility(View.GONE);
+        }
+        if(listItem.getLandline()!=null && !listItem.getLandline().isEmpty())
+        {
+            r2.setVisibility(View.VISIBLE);
+            tvDetPhoneNo.setText("+977"+listItem.getLandline());
 
+            ImgBtnCallPh.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    giveCall("+977"+listItem.getLandline());
+                }
+            });
 
+//            ImgCallBtnMsgPh.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    sendMessage(listItem.getLandline());
+//                }
+//            });
+
+        }
+        else {
+            r2.setVisibility(View.GONE);
+        }
+if(listItem.getOrganization()!=null && !listItem.getOrganization().isEmpty()){
+    tvDetOrg.setVisibility(View.VISIBLE);
+    tvDetOrg.setText(listItem.getOrganization());
+}
+else
+{
+    tvDetOrg.setVisibility(View.GONE);
+}
+
+       if(listItem.getPerson()!=null && !listItem.getPerson().isEmpty()) {
+           tvDetPerson.setVisibility(View.VISIBLE);
+           tvDetPerson.setText(listItem.getPerson());
+       }
+       else{
+           tvDetPerson.setVisibility(View.GONE);
+       }
     }
 
     private void sendMessage(final String phoneNO) {
@@ -114,12 +154,15 @@ public class DetailActivity extends AppCompatActivity {
     private void initializeViews() {
         tvDetOrg=(TextView)findViewById(R.id.det_org);
         tvDetPerson=(TextView)findViewById(R.id.det_person);
-        tvDetPhoneNo=(TextView)findViewById(R.id.phone);
+
+       //r1:
         tvDetMobNo=(TextView)findViewById(R.id.mob);
-        ImgBtnCallPh=(ImageButton) findViewById(R.id.callPhone);
         ImgCallBtnMob=(ImageButton) findViewById(R.id.callMob);
-        ImgCallBtnMsgMob=(ImageButton) findViewById(R.id.mail);
-        ImgCallBtnMsgPh=(ImageButton)findViewById(R.id.mailPhone);
+        ImgCallBtnMsgMob=(ImageButton) findViewById(R.id.mesage_mob);
+        //r2:
+        tvDetPhoneNo=(TextView)findViewById(R.id.phone);
+        ImgBtnCallPh=(ImageButton) findViewById(R.id.callPhone);
+//        ImgCallBtnMsgPh=(ImageButton)findViewById(R.id.mailPhone);
 
     }
 }
