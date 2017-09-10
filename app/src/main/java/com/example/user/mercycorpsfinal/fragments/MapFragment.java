@@ -62,7 +62,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     public ArrayList<Contact> contacts;
     public Contact contact;
     public KmlLayer layerRiver,layerSettlement,layerInundation;
-    public Button btn_settlement,ews;
+    public Button btn_settlement,ews,settlement;
     List<Marker> markers;
     List<Marker> markerSettlement;
     Marker m;
@@ -88,12 +88,22 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mMapView = (MapView) mView.findViewById(R.id.map);
-        if (mMapView != null) {
-            mMapView.onCreate(null);
-            mMapView.onResume();
-            mMapView.getMapAsync(this);
 
+        try {
+            if (mMapView != null) {
+                mMapView.onCreate(null);
+                mMapView.onResume();
+                mMapView.getMapAsync(this);}
+        }catch (Exception e){
+            if (mMapView != null) {
+                mMapView.onCreate(null);
+                mMapView.onResume();
+                mMapView.getMapAsync(this);}
         }
+
+
+
+
     }
 
 
@@ -104,6 +114,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
        // mgoogleMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(LayoutInflater.from(getContext())));
         btn_settlement=(Button) mView.findViewById(R.id.btn_settlement);
         ews=(Button) mView.findViewById(R.id.btn_ews);
+        settlement=(Button)mView.findViewById(R.id.settlement);
         markers=new ArrayList<Marker>();
         markerSettlement=new ArrayList<Marker>();
         prepareData();
@@ -113,6 +124,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         btn_settlement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                settlement.setVisibility(View.VISIBLE);
 
                 for (Marker marker: markers
                         ) {
@@ -127,8 +139,14 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
 
                 // GroundOverlay imageOverlay = mgoogleMap.addGroundOverlay(inunMap);
                 imageOverlay = mgoogleMap.addGroundOverlay(inunMap);
-                prepareSettlement();
+                //prepareSettlement();
 
+            }
+        });
+        settlement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                prepareSettlement();
             }
         });
 
@@ -136,6 +154,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         ews.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                settlement.setVisibility(View.INVISIBLE);
                 if (layerSettlement!=null){
                     layerSettlement.removeLayerFromMap();
                 }
@@ -332,79 +351,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
             }
             else {
                 Toast.makeText(getContext(), "Please connect the internet.", Toast.LENGTH_SHORT).show();
-               /* final Handler handler = new Handler();
-                final Runnable task = new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            while (!isInternetAvailable()){
-
-                            }
-                            if (isInternetAvailable()){
-                                internetAvailable();
-                                Log.e(TAG, "run: " );
-
-                            }
-                        } catch (IOException e) {
-
-                        } catch (InterruptedException e) {
-
-                        }
-                        Log.e(TAG, "run: r" );
-                        //code you want to run every second
-
-                    }
-                };
-                handler.postDelayed(task, 1000);*/
-                      /*  while (isInternetAvailable()!=true){
-                            Log.e(TAG, "onClick: " );
-                            isInternetAvailable();
-                        }*/
-                // internetAvailable();
-                       /* mHandler=new Handler();
-                        thread=new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                try {
-                                    while (isInternetAvailable()!=true){
-                                        //Log.e(TAG, "onClick: hello" );
-                                       mHandler.post(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                try {
-                                                    isInternetAvailable();
-                                                } catch (IOException e) {
-
-                                                } catch (InterruptedException e) {
-
-                                                }
-                                            }}
-                                        );
-                                       // internetAvailable();
-                                    }
-                                    internetAvailable();
-                                } catch (IOException e) {
-
-                                } catch (InterruptedException e) {
-
-                                }
-                            }
-                        });
-                        thread.start();
-                        mHandler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                try {
-                                    isInternetAvailable();
-                                } catch (IOException e) {
-
-                                } catch (InterruptedException e) {
-
-                                }
-                            }});*/
-
-
-
             }
         } catch (IOException e) {
 
@@ -422,33 +368,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
             }
         });
     }
-    @Override
-    public void onResume() {
-        super.onResume();
-        final Handler handler = new Handler();
-        final Runnable task = new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    if (isInternetAvailable()){
-                        internetAvailable();
-                        Log.e(TAG, "run: " );
-                    }
-                } catch (IOException e) {
 
-                } catch (InterruptedException e) {
-
-                }
-                //code you want to run every second
-
-            }
-        };
-        handler.postDelayed(task, 1000);
-        task.run();
-
-
-
-    }
     public void prepareData() {
         latLons = new ArrayList<LatLon>();
         contacts=new ArrayList<Contact>();
@@ -673,11 +593,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         latLon = new LatLon("जलबायु तथा मौसम बिभाग","वर्षा", "","डी एच एम आधारित", 80.55997,28.81271, contacts);
         latLons.add(36, latLon);
 
-        contacts=new ArrayList<Contact>();
-        contact=new Contact("Dine Tamang","9841418905");
-        contacts.add(contact);
-        latLon = new LatLon("Mercy Corpse","वर्षा", "","INGO", 80.55,29.00, contacts);
-        latLons.add(37, latLon);
+
 
     }
 

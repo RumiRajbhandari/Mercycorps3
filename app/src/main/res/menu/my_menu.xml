@@ -18,7 +18,7 @@
         <item
             android:id="@+id/apatkalin"
             android:icon="@drawable/callall"
-            android:title="आपतकालिन अवस्थाम"/>
+            android:title="आपतकालिन अवस्थामा"/>
 
         <item
         android:icon="@drawable/ic_assignment_black_24dp"
