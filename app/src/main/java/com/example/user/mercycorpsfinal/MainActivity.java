@@ -24,6 +24,7 @@ import android.widget.ImageView;
 import com.example.user.mercycorpsfinal.activity.AboutUsActivity;
 import com.example.user.mercycorpsfinal.activity.ApatkalinAwasthaActivity;
 import com.example.user.mercycorpsfinal.activity.CommunicationActivity;
+import com.example.user.mercycorpsfinal.activity.ThresholdActivity;
 import com.example.user.mercycorpsfinal.fragments.ClusterFragment;
 import com.example.user.mercycorpsfinal.fragments.DHMFragment;
 import com.example.user.mercycorpsfinal.fragments.EWSResponse;
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         setupViewPager(viewPager);
 
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer);
-        img_drawer=(ImageView)drawerLayout.findViewById(R.id.image_view);
+//        img_drawer=(ImageView)drawerLayout.findViewById(R.id.image_view);
 
         navigationView = (NavigationView)findViewById(R.id.navigation);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -74,6 +75,16 @@ public class MainActivity extends AppCompatActivity {
                         intent =new Intent(MainActivity.this, ApatkalinAwasthaActivity.class);
                         startActivity(intent);
                         break;
+                    case R.id.dhmTollFree:
+                        Intent callIntent = new Intent(Intent.ACTION_CALL);
+                        callIntent.setData(Uri.parse("tel:" + "1155"));
+                        if (ActivityCompat.checkSelfPermission(MainActivity.this, android.Manifest.permission.CALL_PHONE) !=
+                                PackageManager.PERMISSION_GRANTED) {
+
+                        }
+                        callIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(callIntent);
+                        break;
 
                     case R.id.commCha:
                         intent=new Intent(MainActivity.this, CommunicationActivity.class);
@@ -82,6 +93,13 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.AboutUs:
                         intent=new Intent(MainActivity.this, AboutUsActivity.class);
                         startActivity(intent);
+                        break;
+                    case R.id.threshold:
+                        intent=new Intent(MainActivity.this,ThresholdActivity.class);
+                        startActivity(intent);
+                        break;
+
+
 
 
 
@@ -107,21 +125,6 @@ public class MainActivity extends AppCompatActivity {
         };
         drawerLayout.setDrawerListener(toggle);
         toggle.syncState();
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent callIntent = new Intent(Intent.ACTION_CALL);
-                callIntent.setData(Uri.parse("tel:" + "1155"));
-                if (ActivityCompat.checkSelfPermission(MainActivity.this, android.Manifest.permission.CALL_PHONE) !=
-                        PackageManager.PERMISSION_GRANTED) {
-                    return;
-                }
-                callIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(callIntent);
-            }
-        });
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);

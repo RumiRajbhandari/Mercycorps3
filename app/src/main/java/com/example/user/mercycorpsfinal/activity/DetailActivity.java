@@ -26,6 +26,8 @@ public class DetailActivity extends AppCompatActivity {
     ImageButton ImgBtnCallPh,ImgCallBtnMob,ImgCallBtnMsgPh,ImgCallBtnMsgMob;
     private Toolbar toolbar;
     RelativeLayout r1,r2;
+    String mob1,mob2,landline1,landline2;
+    int length,len;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,12 +50,29 @@ public class DetailActivity extends AppCompatActivity {
 
         if(listItem.getMob()!=null && !listItem.getMob().isEmpty()){
             r1.setVisibility(View.VISIBLE);
-            tvDetMobNo.setText(listItem.getMob());
-
+             length=listItem.getMob().length();
+            Log.d("lengthValue", String.valueOf(length));
+            if(length==8){
+                mob1="+977"+listItem.getMob();
+                tvDetMobNo.setText(mob1);
+            }
+            else {
+                mob2=listItem.getMob();
+                tvDetMobNo.setText(mob2);
+            }
             ImgCallBtnMob.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    giveCalllTo(listItem.getMob());
+                    if(length==8){
+                        giveCalllTo(mob1);
+
+                    }
+                    else {
+
+                        giveCalllTo(mob2);
+
+                    }
+
                 }
             });
                 ImgCallBtnMsgMob.setOnClickListener(new View.OnClickListener() {
@@ -71,19 +90,54 @@ public class DetailActivity extends AppCompatActivity {
         if(listItem.getLandline()!=null && !listItem.getLandline().isEmpty())
         {
             r2.setVisibility(View.VISIBLE);
-            tvDetPhoneNo.setText("+977"+listItem.getLandline());
+           if(listItem.getLandline()!=null &&!listItem.getLandline().isEmpty()){
+               len=listItem.getLandline().length();
+               if(len==8){
+                   landline1="+977"+listItem.getLandline();
+                   tvDetPhoneNo.setText(landline1);
+
+
+               }
+               else{
+                   landline2=listItem.getLandline();
+                   tvDetPhoneNo.setText(landline2);
+               }
+           }
+
+
 
             ImgBtnCallPh.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    giveCall("+977"+listItem.getLandline());
+                    if(len==8){
+                        giveCall(landline1);
+
+                    }
+                    else {
+
+                        giveCall(landline2);
+
+                    }
+
+//                        giveCall("+977"+listItem.getLandline());
+
+
                 }
             });
 
 //            ImgCallBtnMsgPh.setOnClickListener(new View.OnClickListener() {
 //                @Override
 //                public void onClick(View view) {
-//                    sendMessage(listItem.getLandline());
+//                    if(length==8){
+//                        sendMessage(landline1);
+//
+//                    }
+//                    else {
+//
+//
+//
+//                    }
+//
 //                }
 //            });
 
