@@ -48,7 +48,24 @@ public class CallListActivity extends AppCompatActivity {
         Intent intent = getIntent();
         latLon = (LatLon) intent.getSerializableExtra("rumi");
         Log.e(TAG, "onCreate: " + latLon.getGauze());
-        gauge.setText("गेज: "+latLon.getGauze());
+        if (latLon.getGauze().equals("dhm")){
+            gauge.setText("अत्तरि,कैलाली");
+            location.setText(latLon.getLocation());
+            basedon.setText(latLon.getBasedOn());
+            river.setText(latLon.getLocation());
+        }
+        else if(latLon.getGauze().equals("dcoe")){
+            gauge.setText("महेन्द्रनगर,कंचनपुर");
+            location.setText(latLon.getLocation());
+            basedon.setText(latLon.getBasedOn());
+            river.setText(latLon.getLocation());
+        }
+        else{
+            gauge.setText("गेज: "+latLon.getGauze());
+            basedon.setText("कैफियत: "+latLon.getBasedOn());
+            location.setText("स्थान: "+latLon.getLocation());
+        }
+
         Log.e(TAG, "onCreate: "+"नदि" );
         if (latLon.getRiver().isEmpty()) {
             river.setText("");
@@ -61,8 +78,8 @@ public class CallListActivity extends AppCompatActivity {
         }
 
 
-        basedon.setText("कैफियत: "+latLon.getBasedOn());
-        location.setText("स्थान: "+latLon.getLocation());
+
+
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 

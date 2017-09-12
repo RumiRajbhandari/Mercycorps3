@@ -187,8 +187,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
                     public void onInfoWindowClick(Marker marker) {
                         Log.e("TAG", "onInfoWindowClick: hello"+marker.getId());
                         String[] str = marker.getId().split("m");
-                        LatLon l1 = latLons.get((Integer.parseInt(str[1]))%37);
-                        Log.e(TAG, "onInfoWindowClick: id is"+(Integer.parseInt(str[1]))%37 );
+                        LatLon l1 = latLons.get((Integer.parseInt(str[1]))%latLons.size());
+                        Log.e(TAG, "onInfoWindowClick: id is"+(Integer.parseInt(str[1]))%latLons.size() );
 
                         Intent intent=new Intent(getContext(),CallListActivity.class);
                         intent.putExtra("rumi",(Serializable)l1);
@@ -309,6 +309,15 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
               m= mgoogleMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.scale)).position(location).title(latlon.getContacts().get(0).getName()).snippet(latlon.getLocation()+"\n"+latlon.getRiver()));
 
             }
+            else if(latlon.getGauze().equals("dhm")){
+                m= mgoogleMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.cloud)).position(location).title(latlon.getContacts().get(0).getName()).snippet(latlon.getLocation()+"\n"+latlon.getRiver()));
+
+            }
+            else if(latlon.getGauze().equals("dcoe")){
+                m= mgoogleMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.dcoe)).position(location).title(latlon.getContacts().get(0).getName()).snippet(latlon.getLocation()+"\n"+latlon.getRiver()));
+
+            }
+
             else {
               m= mgoogleMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.drop1)).position(location).title(latlon.getContacts().get(0).getName()).snippet(latlon.getLocation()+"\n"+latlon.getRiver()));
 
@@ -330,7 +339,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         mgoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(28.8318, 80.51835), 10.0f));
 
         try {
-            layerRiver = new KmlLayer(mgoogleMap, R.raw.majorriver, this.getContext());
+            layerRiver = new KmlLayer(mgoogleMap, R.raw.river, this.getContext());
             layerRiver.addLayerToMap();
 
         } catch (XmlPullParserException e) {
@@ -370,10 +379,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         } catch (InterruptedException e) {
 
         }
-
-
-
-
         mgoogleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
@@ -597,13 +602,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         contacts=new ArrayList<>();
         contact=new Contact("जनक राजपन्त","9858790084");
         contacts.add(contact);
-        latLon = new LatLon("आपत्कालिन संचालन केन्द्र","वर्षा", "","", 80.184154,28.969355, contacts);
+        latLon = new LatLon("आपत्कालिन संचालन केन्द्र","dcoe", "","", 80.184154,28.969355, contacts);
         latLons.add(35, latLon);
 
         contacts=new ArrayList<>();
         contact=new Contact("राममनि मिश्र","9848318777");
         contacts.add(contact);
-        latLon = new LatLon("जलबायु तथा मौसम बिभाग","वर्षा", "","डी एच एम आधारित", 80.55997,28.81271, contacts);
+        latLon = new LatLon("जलबायु तथा मौसम बिभाग","dhm", "","डी एच एम आधारित", 80.55997,28.81271, contacts);
         latLons.add(36, latLon);
 
 
