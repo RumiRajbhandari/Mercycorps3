@@ -85,6 +85,8 @@
             android:uiOptions="splitActionBarWhenNarrow" />
         <activity android:name=".activity.AboutUsActivity" />
         <activity android:name=".activity.ThresholdActivity"></activity>
+        <activity android:name=".activity.Sheet25"
+            android:label="@string/sheet25_str"/>
     </application>
 
 </manifest>

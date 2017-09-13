@@ -131,12 +131,12 @@ public class MainActivity extends AppCompatActivity {
     }
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new MapFragment(), "Map");
-        adapter.addFragment(new EWSResponse(), "EWS Response");
-        adapter.addFragment(new DHMFragment(),"DHM");
-        adapter.addFragment(new EmergencyNumbers(),"Emergency Numbers");
-        adapter.addFragment(new ClusterFragment(),"Clusters");
-        adapter.addFragment(new GaugeReaderFragment(),"Gauge Reader");
+        adapter.addFragment(new MapFragment(), "नक्सा");
+        adapter.addFragment(new EWSResponse(), "पूर्व सूचना प्रणाली प्रतिकार्य  ");
+        adapter.addFragment(new DHMFragment()," जल तथा  मौसम बिज्ञान बिभाग  ");
+        adapter.addFragment(new EmergencyNumbers(),"आपत्कालिन नम्बर");
+        adapter.addFragment(new ClusterFragment(),"क्षेत्रगत समूह ");
+        adapter.addFragment(new GaugeReaderFragment(),"अवलोकन कर्ता");
         viewPager.setAdapter(adapter);
     }
 

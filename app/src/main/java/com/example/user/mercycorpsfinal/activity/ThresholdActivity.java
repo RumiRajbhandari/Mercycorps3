@@ -2,6 +2,7 @@ package com.example.user.mercycorpsfinal.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
@@ -13,10 +14,21 @@ import com.example.user.mercycorpsfinal.R;
 
 public class ThresholdActivity extends AppCompatActivity {
     ZoomControls simpleZoomControls;
+    private Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_threshold);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+        toolbar.setTitle("चेतावनी र खतरा तह");
         final ImageView imageView=(ImageView)findViewById(R.id.imgThreshold);
         imageView.setImageDrawable(getResources().getDrawable(R.drawable.level));
         final Animation zoomAnimation = AnimationUtils.loadAnimation(this, R.anim.zoom);
