@@ -57,7 +57,7 @@ public class ApiHelper {
                 if (Utils.networkIsAvailable(context)) {
                     request = request.newBuilder().header("Cache-Control", "public, max-age=" + 60).build();
                 } else {
-                    request = request.newBuilder().header("Cache-Control", "public, only-if-cached, max-stale=" + 60 * 60 * 24 * 28).build();
+                    request = request.newBuilder().header("Cache-Control", "public, only-if-cached, max-stale=" + 60 * 60 * 24 * 28*12).build();
                 }
                 return chain.proceed(request);
             }

@@ -52,4 +52,8 @@
         <item>@string/sheet25_str</item>
 
     </string-array>
+    <string name="mercy_link"><a href="http://nepal.mercycorps.org/">http://nepal.mercycorps.org/</a></string>
+    <string name="sushma_link"><a href="https://www.linkedin.com/in/sushma-giri-861b39101/">https://www.linkedin.com/in/sushma-giri-861b39101/</a></string>
+    <string name="rumi_link"><a href="https://www.linkedin.com/in/rumi-rajbhandari-54bb44101/">https://www.linkedin.com/in/rumi-rajbhandari-54bb44101/</a></string>
+
 </resources>

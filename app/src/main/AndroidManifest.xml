@@ -83,7 +83,8 @@
             android:icon="@mipmap/ic_launcher"
             android:supportsRtl="true"
             android:uiOptions="splitActionBarWhenNarrow" />
-        <activity android:name=".activity.AboutUsActivity" />
+        <activity android:name=".activity.AboutUsActivity"
+            android:label="About Us"/>
         <activity android:name=".activity.ThresholdActivity"></activity>
         <activity android:name=".activity.Sheet25"
             android:label="@string/sheet25_str"/>
