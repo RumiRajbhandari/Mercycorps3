@@ -22,7 +22,7 @@
         <item
             android:id="@+id/dhmTollFree"
             android:icon="@drawable/callall"
-            android:title="DHM Toll Free"/>
+            android:title="जल तथा  मौसम बिज्ञान बिभाग टोल फ्री"/>
 
         <item
         android:icon="@drawable/ic_assignment_black_24dp"

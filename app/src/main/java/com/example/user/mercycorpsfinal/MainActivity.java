@@ -113,13 +113,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
-                getSupportActionBar().setTitle("");
+                getSupportActionBar().setTitle(R.string.app_name);
             }
 
             @Override
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
-                getSupportActionBar().setTitle("EWS Pocket Dairy");
+                getSupportActionBar().setTitle(R.string.app_name);
 
             }
         };
