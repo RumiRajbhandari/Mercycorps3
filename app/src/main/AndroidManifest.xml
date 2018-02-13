@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.user.mercycorpsfinal">
+    package="com.mercycorps.ews">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
@@ -13,9 +13,10 @@
         android:icon="@drawable/logotwo"
         android:label="EWS Pocket Diary"
         android:largeHeap="true"
+        android:hardwareAccelerated="false"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.SplashActivity">
+        <activity android:name="com.mercycorps.ews.activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,66 +29,66 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".activity.KanchanpurList"
+            android:name="com.mercycorps.ews.activity.KanchanpurList"
             android:label="@string/app_name" />
-        <activity android:name=".activity.CallListActivity" />
+        <activity android:name="com.mercycorps.ews.activity.CallListActivity" />
         <activity
-            android:name=".activity.DetailActivity"
+            android:name="com.mercycorps.ews.activity.DetailActivity"
             android:label="@string/app_name" />
-        <activity android:name=".activity.ApatkalinAwasthaActivity"
+        <activity android:name="com.mercycorps.ews.activity.ApatkalinAwasthaActivity"
             android:label="मानवीय सहायतामा संलग्न निकाय"
             />
-        <activity android:name=".activity.GairSarkariSasthaActivity"
+        <activity android:name="com.mercycorps.ews.activity.GairSarkariSasthaActivity"
             android:label="@string/sheet4_str"
             />
 
-        <activity android:name=".activity.SuchanaBewasthapan5Activity"
+        <activity android:name="com.mercycorps.ews.activity.SuchanaBewasthapan5Activity"
             android:label="@string/sheet5_str" />
-        <activity android:name=".activity.Sheet3" />
-        <activity android:name=".activity.Sheet6"
+        <activity android:name="com.mercycorps.ews.activity.Sheet3" />
+        <activity android:name="com.mercycorps.ews.activity.Sheet6"
             android:label="@string/sheet6_str"/>
-        <activity android:name=".activity.Sheet7"
+        <activity android:name="com.mercycorps.ews.activity.Sheet7"
             android:label="@string/sheet7_str"
             />
-        <activity android:name=".activity.Sheet8"
+        <activity android:name="com.mercycorps.ews.activity.Sheet8"
             android:label="@string/sheet8_str"/>
-        <activity android:name=".activity.Sheet9"
+        <activity android:name="com.mercycorps.ews.activity.Sheet9"
             android:label="@string/sheet_str"/>
-        <activity android:name=".activity.Sheet10"
+        <activity android:name="com.mercycorps.ews.activity.Sheet10"
             android:label="@string/sheet10_str"/>
-        <activity android:name=".activity.Sheet11"
+        <activity android:name="com.mercycorps.ews.activity.Sheet11"
             android:label="@string/sheet11_str"/>
-        <activity android:name=".activity.Sheet12"
+        <activity android:name="com.mercycorps.ews.activity.Sheet12"
             android:label="@string/sheet12_str"/>
-        <activity android:name=".activity.Sheet13"
+        <activity android:name="com.mercycorps.ews.activity.Sheet13"
             android:label="@string/sheet13_str"  />
-        <activity android:name=".activity.Sheet14"
+        <activity android:name="com.mercycorps.ews.activity.Sheet14"
             android:label="@string/sheet14_str"/>
-        <activity android:name=".activity.Sheet15"
+        <activity android:name="com.mercycorps.ews.activity.Sheet15"
             android:label="@string/sheet15_str"/>
-        <activity android:name=".activity.Sheet16"
+        <activity android:name="com.mercycorps.ews.activity.Sheet16"
             android:label="@string/sheet16_str"/>
-        <activity android:name=".activity.Sheet17"
+        <activity android:name="com.mercycorps.ews.activity.Sheet17"
             android:label="@string/sheet17_str"/>
-        <activity android:name=".activity.Sheet18"
+        <activity android:name="com.mercycorps.ews.activity.Sheet18"
             android:label="@string/sheet18_str"/>
-        <activity android:name=".activity.Sheet19"
+        <activity android:name="com.mercycorps.ews.activity.Sheet19"
             android:label="@string/sheet19_str"/>
-        <activity android:name=".activity.Sheet20"
+        <activity android:name="com.mercycorps.ews.activity.Sheet20"
             android:label="@string/sheet20_str"/>
-        <activity android:name=".activity.Sheet21"
+        <activity android:name="com.mercycorps.ews.activity.Sheet21"
             android:label="@string/sheet21_str"/>
-        <activity android:name=".activity.CommunicationActivity" />
+        <activity android:name="com.mercycorps.ews.activity.CommunicationActivity" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.mercycorps.ews.MainActivity"
             android:label="@string/app_name"
             android:icon="@mipmap/ic_launcher"
             android:supportsRtl="true"
             android:uiOptions="splitActionBarWhenNarrow" />
-        <activity android:name=".activity.AboutUsActivity"
+        <activity android:name="com.mercycorps.ews.activity.AboutUsActivity"
             android:label="About Us"/>
-        <activity android:name=".activity.ThresholdActivity"></activity>
-        <activity android:name=".activity.Sheet25"
+        <activity android:name="com.mercycorps.ews.activity.ThresholdActivity"></activity>
+        <activity android:name="com.mercycorps.ews.activity.Sheet25"
             android:label="@string/sheet25_str"/>
     </application>
 
