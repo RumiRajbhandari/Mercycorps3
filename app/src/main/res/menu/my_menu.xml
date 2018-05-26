@@ -12,7 +12,7 @@
         <item
             android:id="@+id/home"
             android:icon="@drawable/ic_home_black_24dp"
-            android:title="Home"
+            android:title="गृहपृष्ठ"
 
             />
         <item
@@ -38,7 +38,7 @@
 
     <item android:id="@+id/AboutUs"
         android:icon="@drawable/ic_person_black_24dp"
-        android:title="About Us"
+        android:title="हाम्रो बारेमा "
 
 
         />

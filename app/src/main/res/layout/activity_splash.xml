@@ -44,21 +44,25 @@
             android:layout_height="wrap_content"
             android:text="जिल्ला आपतकालिन कार्य संचालन केन्द्र "
             android:id="@+id/textView3"
+            android:textSize="12sp"
             android:textStyle="bold"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="महेन्द्रनगर, कंचनपुर "
+            android:textSize="12sp"
             android:id="@+id/text5"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="जल तथा मौसम विज्ञान विभागा"
+            android:textSize="12sp"
             android:id="@+id/textView2"
             android:textStyle="bold"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="12sp"
             android:text="अत्तरिया"
             android:id="@+id/textView4" />
     </LinearLayout>
@@ -70,5 +74,11 @@
         android:id="@+id/imageView2"
         android:layout_above="@+id/linearLayout"
         android:layout_toEndOf="@+id/textView" />
+    <ImageView
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/nrcs"
+        android:layout_below="@id/imageView2"
+        android:layout_alignEnd="@+id/imageView2"/>
 
 </RelativeLayout>
