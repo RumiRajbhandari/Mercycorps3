@@ -22,9 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class ApiHelper {
-    public static final String BASE_URL = "https://raw.githubusercontent.com/sushmagiri/MercyCorpFinalData/master/";
-
-
+    public static final String BASE_URL = "https://raw.githubusercontent.com/MercyCorpsNepal/EWSdata/master/";
 
     public MercyCorpInterface getApiInterface() {
 

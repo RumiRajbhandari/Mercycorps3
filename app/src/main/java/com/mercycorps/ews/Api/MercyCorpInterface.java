@@ -12,63 +12,63 @@ import retrofit2.http.GET;
  */
 
 public interface MercyCorpInterface {
-    @GET("sheet1.json")
+    @GET("ApatKalinAwastha.json")
     Call<List<ListItem>> getList1();
-    @GET("sheet2.json")
+    @GET("ApatKalinAwastha.json")
     Call<List<ListItem>> getList2();
 
-    @GET("sheet3.json")
+    @GET("AtyantaJarooriNumber.json")
     Call<List<ListItem>> getList3();
 
-    @GET("sheet4.json")
+    @GET("GairSarkariSastha.json")
     Call<List<ListItem>> getList4();
 
     @GET("sheet5.json")
     Call<List<ListItem>> getList5();
-    @GET("sheet6.json")
+    @GET("KadhyaKaryaSamuha.json")
     Call<List<ListItem>> getList6();
-    @GET("sheet7.json")
+    @GET("AwasahTathaGairKadhyanna.json")
     Call<List<ListItem>> getList7();
-    @GET("sheet8.json")
+    @GET("KhaneyPaniSipharisTathaSwasthya.json")
     Call<List<ListItem>> getList8();
 
-    @GET("sheet9.json")
+    @GET("SwasthyaTathaPoshanKshetraContact.json")
     Call<List<ListItem>> getList9();
 
-    @GET("sheet10.json")
+    @GET("SamrakchyanKshetraSamparkaByakti.json")
     Call<List<ListItem>> getList10();
 
 
-    @GET("sheet11.json")
+    @GET("ShikshyaKshetraSamparkaByakti.json")
     Call<List<ListItem>> getList11();
 
-    @GET("sheet12.json")
+    @GET("PurnaSthapanTathaPurnaNirmanKaralaya.json")
     Call<List<ListItem>> getList12();
-    @GET("sheet13.json")
+    @GET("JillaBipatPrakriyaSamiti.json")
     Call<List<ListItem>> getList13();
-    @GET("sheet14.json")
+    @GET("JIllaStithMasterTrainerDetail.json")
     Call<List<ListItem>> getList14();
 
-    @GET("sheet15.json")
+    @GET("PurbaSuchanaPranaliKaryaDal.json")
     Call<List<ListItem>> getList15();
-    @GET("sheet16.json")
+    @GET("PrathamikUpacharKaryaDal.json")
     Call<List<ListItem>> getList16();
-    @GET("sheet17.json")
+    @GET("KhojTathaUddharKaryalaya.json")
     Call<List<ListItem>> getList17();
-    @GET("sheet18.json")
+    @GET("ChyaatiTathaAwasektaKaryalaya.json")
     Call<List<ListItem>> getList18();
-    @GET("sheet19.json")
+    @GET("PrathamikUpacharKaryaDal.json")
     Call<List<ListItem>> getList19();
 
-    @GET("sheet20.json")
+    @GET("KhojTathaUdharKaryaDalRedCross.json")
     Call<List<ListItem>> getList20();
-    @GET("sheet21.json")
+    @GET("PurbaSuchanaPranaliKaryaDalRedCross.json")
     Call<List<ListItem>> getList21();
-    @GET("sheet26.json")
+    @GET("JalMapanKendra.json")
     Call<List<ListItem>> getList26();
-    @GET("sheet27.json")
+    @GET("BarshaMapanKendra.json")
     Call<List<ListItem>> getList27();
-    @GET("sheet25.json")
+    @GET("Unamed.json")
     Call<List<ListItem>> getList25();
 
 

@@ -37,7 +37,6 @@ public class ApatkalinAwasthaActivity extends AppCompatActivity {
         rv.setHasFixedSize(true);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
