@@ -18,7 +18,7 @@ import com.mercycorps.ews.R;
 public class WebDadeldhura extends Fragment {
     View mView;
     FragmentTabHost mTabHost;
-    String url="http://hydrology.gov.np/dadeldhura-display/";
+    String url="http://hydrology.gov.np/#/?_k=u5xdie";
 
     public  WebDadeldhura(){
 

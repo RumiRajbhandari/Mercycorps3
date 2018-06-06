@@ -18,7 +18,7 @@ import com.mercycorps.ews.R;
 public class WebRiver extends Fragment {
     View mView;
     FragmentTabHost mTabHost;
-    String url="http://hydrology.gov.np/new/bull3/index.php/hydrology/screen_display";
+    String url="http://hydrology.gov.np/#/river_watch?_k=q054pv";
 
     public  WebRiver(){
 

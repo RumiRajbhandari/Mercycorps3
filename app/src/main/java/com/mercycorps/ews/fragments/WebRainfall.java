@@ -19,7 +19,7 @@ import com.mercycorps.ews.R;
 public class WebRainfall extends Fragment {
     View mView;
     FragmentTabHost mTabHost;
-    String url="http://hydrology.gov.np/new/bull3/index.php/hydrology/rainfall_watch";
+    String url="http://hydrology.gov.np/#/rainfall_watch?_k=3wuacq";
 
     public  WebRainfall(){
 
