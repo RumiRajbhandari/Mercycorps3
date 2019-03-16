@@ -64,12 +64,12 @@ public class DetailActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     if(length==8){
-                        giveCalllTo(mob1);
+                        giveCallTo(mob1);
 
                     }
                     else {
 
-                        giveCalllTo(mob2);
+                        giveCallTo(mob2);
 
                     }
 
@@ -110,12 +110,12 @@ public class DetailActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     if(len==8){
-                        giveCall(landline1);
+                        giveCallTo(landline1);
 
                     }
                     else {
 
-                        giveCall(landline2);
+                        giveCallTo(landline2);
 
                     }
 
@@ -189,18 +189,22 @@ else
 
 
 
-    public void giveCalllTo(String phoneNo) {
-        Intent callIntent = new Intent(Intent.ACTION_CALL);
+    public void giveCallTo(String phoneNo) {
+        /*Intent callIntent = new Intent(Intent.ACTION_CALL);
         callIntent.setData(Uri.parse("tel:" + phoneNo));
         if (ActivityCompat.checkSelfPermission(DetailActivity.this, android.Manifest.permission.CALL_PHONE) !=
                 PackageManager.PERMISSION_GRANTED) {
             return;
         }
         callIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(callIntent);*/
+        Intent callIntent = new Intent();
+        callIntent.setAction(Intent.ACTION_DIAL);
+        callIntent.setData(Uri.parse("tel:" + phoneNo));
         startActivity(callIntent);
     }
 
-    public void giveCall(String mobNo) {
+    /*public void giveCall(String mobNo) {
         Intent callIntent = new Intent(Intent.ACTION_CALL);
         callIntent.setData(Uri.parse("tel:" + mobNo));
         if (ActivityCompat.checkSelfPermission(DetailActivity.this, android.Manifest.permission.CALL_PHONE) !=
@@ -209,7 +213,7 @@ else
         }
         callIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(callIntent);
-    }
+    }*/
 
     private void initializeViews() {
         tvDetOrg=(TextView)findViewById(R.id.det_org);
