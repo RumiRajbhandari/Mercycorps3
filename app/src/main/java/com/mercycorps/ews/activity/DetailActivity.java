@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.mercycorps.ews.R;
 import com.mercycorps.ews.model.ListItem;
+import com.mercycorps.ews.utils.UtilityKt;
 
 public class DetailActivity extends AppCompatActivity {
     TextView tvDetOrg,tvDetPerson,tvDetPhoneNo,tvDetMobNo;
@@ -64,13 +65,11 @@ public class DetailActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     if(length==8){
-                        giveCallTo(mob1);
+                        UtilityKt.giveCallTo(getApplicationContext(), mob1);
 
                     }
                     else {
-
-                        giveCallTo(mob2);
-
+                        UtilityKt.giveCallTo(getApplicationContext(), mob2);
                     }
 
                 }
@@ -110,36 +109,16 @@ public class DetailActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     if(len==8){
-                        giveCallTo(landline1);
+                        UtilityKt.giveCallTo(getApplicationContext(), landline1);
 
                     }
                     else {
-
-                        giveCallTo(landline2);
+                        UtilityKt.giveCallTo(getApplicationContext(), landline2);
 
                     }
 
-//                        giveCall("+977"+listItem.getLandline());
-
-
                 }
             });
-
-//            ImgCallBtnMsgPh.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    if(length==8){
-//                        sendMessage(landline1);
-//
-//                    }
-//                    else {
-//
-//
-//
-//                    }
-//
-//                }
-//            });
 
         }
         else {
@@ -176,8 +155,7 @@ else
                     public void onClick(DialogInterface dialog, int whichButton) {
                         String message = msgBody.getText().toString();
                         Log.e("TAG", "onClick: "+message );
-                        SmsManager sms = SmsManager.getDefault();
-                        sms.sendTextMessage(phoneNO, null, message, null, null);
+                        UtilityKt.sendMessage(getApplicationContext(),phoneNO, message);
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -189,31 +167,6 @@ else
 
 
 
-    public void giveCallTo(String phoneNo) {
-        /*Intent callIntent = new Intent(Intent.ACTION_CALL);
-        callIntent.setData(Uri.parse("tel:" + phoneNo));
-        if (ActivityCompat.checkSelfPermission(DetailActivity.this, android.Manifest.permission.CALL_PHONE) !=
-                PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-        callIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(callIntent);*/
-        Intent callIntent = new Intent();
-        callIntent.setAction(Intent.ACTION_DIAL);
-        callIntent.setData(Uri.parse("tel:" + phoneNo));
-        startActivity(callIntent);
-    }
-
-    /*public void giveCall(String mobNo) {
-        Intent callIntent = new Intent(Intent.ACTION_CALL);
-        callIntent.setData(Uri.parse("tel:" + mobNo));
-        if (ActivityCompat.checkSelfPermission(DetailActivity.this, android.Manifest.permission.CALL_PHONE) !=
-                PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-        callIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(callIntent);
-    }*/
 
     private void initializeViews() {
         tvDetOrg=(TextView)findViewById(R.id.det_org);
@@ -229,4 +182,5 @@ else
 //        ImgCallBtnMsgPh=(ImageButton)findViewById(R.id.mailPhone);
 
     }
+
 }

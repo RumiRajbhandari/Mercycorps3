@@ -31,6 +31,7 @@ import com.mercycorps.ews.fragments.EWSResponse;
 import com.mercycorps.ews.fragments.EmergencyNumbers;
 import com.mercycorps.ews.fragments.GaugeReaderFragment;
 import com.mercycorps.ews.fragments.MapFragment;
+import com.mercycorps.ews.utils.UtilityKt;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,14 +75,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);
                         break;
                     case R.id.dhmTollFree:
-                        Intent callIntent = new Intent(Intent.ACTION_CALL);
-                        callIntent.setData(Uri.parse("tel:" + "1155"));
-                        if (ActivityCompat.checkSelfPermission(MainActivity.this, android.Manifest.permission.CALL_PHONE) !=
-                                PackageManager.PERMISSION_GRANTED) {
-
-                        }
-                        callIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(callIntent);
+                        UtilityKt.giveCallTo(getApplicationContext(),"1155");
                         break;
 
                     case R.id.commCha:
@@ -158,22 +152,6 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragment(new GaugeReaderFragment(),"अवलोकन कर्ता");
         viewPager.setAdapter(adapter);
     }
-
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.my_menu, menu);
-        return true;
-    }*/
-
-   /* @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        Intent intent = new Intent(MainActivity.this, AboutUsActivity.class);
-        startActivity(intent);
-        // return true;
-
-//
-        return super.onOptionsItemSelected(item);
-    }*/
 }
 
 class ViewPagerAdapter extends FragmentPagerAdapter {

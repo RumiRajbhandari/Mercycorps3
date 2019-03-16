@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.mercycorps.ews.R;
 import com.mercycorps.ews.model.Contact;
+import com.mercycorps.ews.utils.UtilityKt;
 
 import java.util.List;
 
@@ -63,7 +64,8 @@ public class CallListAdapter extends RecyclerView.Adapter<CallListAdapter.MyView
         holder.call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                giveCall(contact.getPhone());
+                UtilityKt.giveCallTo(context, contact.getPhone());
+
             }
         });
         holder.mail.setOnClickListener(new View.OnClickListener() {
@@ -80,17 +82,6 @@ public class CallListAdapter extends RecyclerView.Adapter<CallListAdapter.MyView
         return contactList.size();
     }
 
-    public void giveCall(String phone){
-         Intent callIntent = new Intent(Intent.ACTION_CALL);
-               callIntent.setData(Uri.parse("tel:" + phone));
-               if (ActivityCompat.checkSelfPermission(context, android.Manifest.permission.CALL_PHONE) !=
-                       PackageManager.PERMISSION_GRANTED) {
-                   return;
-               }
-        callIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-               context.startActivity(callIntent);
-    }
-
     public void sendMail(final Contact contact){
         final EditText msgBody = new EditText(context);
 
@@ -104,8 +95,7 @@ public class CallListAdapter extends RecyclerView.Adapter<CallListAdapter.MyView
                     public void onClick(DialogInterface dialog, int whichButton) {
                         String message = msgBody.getText().toString();
                         Log.e("TAG", "onClick: "+message );
-                        SmsManager sms = SmsManager.getDefault();
-                        sms.sendTextMessage(contact.getPhone(), null, message, null, null);
+                        UtilityKt.sendMessage(context, contact.getPhone(),message);
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
