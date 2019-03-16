@@ -66,9 +66,9 @@ public class DHMFragment extends Fragment {
 
 
         FragmentAdapter adapter = new FragmentAdapter(getChildFragmentManager());
-        adapter.addFragment(new WebRiver(), "River");
-        adapter.addFragment(new WebRainfall(), "Rainfall");
-        adapter.addFragment(new WebDadeldhura(), "Dadeldhura Display");
+        adapter.addFragment(new WebMahakaliBasin(), "Mahakali Basin");
+//        adapter.addFragment(new WebRainfall(), "Rainfall");
+        adapter.addFragment(new WebDadeldhura(), "Barsa/Jal Mapan");
 
 
         viewPager.setAdapter(adapter);

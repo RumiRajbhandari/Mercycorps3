@@ -15,12 +15,12 @@ import com.mercycorps.ews.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class WebRiver extends Fragment {
+public class WebMahakaliBasin extends Fragment {
     View mView;
     FragmentTabHost mTabHost;
-    String url="http://hydrology.gov.np/#/river_watch?_k=q054pv";
+    String url="http://hydrology.gov.np:3002/#/Mahakali_Basin?_k=07p1db";
 
-    public  WebRiver(){
+    public WebMahakaliBasin(){
 
     }
     @Nullable
